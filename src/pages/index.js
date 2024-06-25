@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Cart from "./cart";
 
 export default function Home() {
   const [menu, setMenu] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     async function loadData() {
@@ -22,6 +25,10 @@ export default function Home() {
     });
   }
 
+  function viewCart() {
+    router.push("/cart");
+  }
+
   if (menu.length === 0) {
     return <h1>Loading...</h1>;
   }
@@ -30,6 +37,7 @@ export default function Home() {
     <>
       <h1>Welcome to Coffee Shop!</h1>
       <h4>Here is our menu</h4>
+      <button onClick={viewCart}>View Your Cart</button>
       <div
         style={{
           display: "flex",
