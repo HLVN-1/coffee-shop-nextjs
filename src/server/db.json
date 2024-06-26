@@ -61,31 +61,5 @@
       "price": 3
     }
   ],
-  "cart": [
-    {
-      "id": 3,
-      "name": "Long Black",
-      "quantity": 1
-    },
-    {
-      "id": 2,
-      "name": "Flat White",
-      "quantity": 1
-    },
-    {
-      "id": 2,
-      "name": "Flat White",
-      "quantity": 1
-    },
-    {
-      "id": 3,
-      "name": "Long Black",
-      "quantity": 1
-    },
-    {
-      "id": 1,
-      "name": "Latte",
-      "quantity": 1
-    }
-  ]
+  "cart": []
 }

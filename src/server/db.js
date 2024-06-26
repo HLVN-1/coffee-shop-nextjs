@@ -26,9 +26,9 @@ export const db = {
       db.cart.push(menuItemId);
       writeDb(db);
     },
-    delete(menuItemId) {
+    delete(cartItemId) {
       const db = readDb();
-      db.cart = db.cart.filter((id) => id !== menuItemId);
+      db.cart = db.cart.filter((cartItem) => cartItem.id !== cartItemId);
       writeDb(db);
     },
   },

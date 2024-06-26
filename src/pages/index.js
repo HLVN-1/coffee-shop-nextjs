@@ -45,26 +45,27 @@ export default function Home() {
           flexWrap: "wrap",
           padding: "10px",
         }}
-      ></div>
-      {menu.map((item) => {
-        return (
-          <div
-            key={item.id}
-            style={{
-              width: "300px",
-              border: "1px solid black",
-              borderRadius: "10px",
-              margin: "10px",
-              padding: "10px",
-            }}
-          >
-            <h3>{item.name}</h3>
-            <p>{item.description}</p>
-            <p>{item.price}</p>
-            <button onClick={() => addToCart(item.id)}>Add to cart</button>
-          </div>
-        );
-      })}
+      >
+        {menu.map((item) => {
+          return (
+            <div
+              key={item.id}
+              style={{
+                width: "300px",
+                border: "1px solid black",
+                borderRadius: "10px",
+                margin: "10px",
+                padding: "10px",
+              }}
+            >
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+              <p>{item.price}</p>
+              <button onClick={() => addToCart(item.id)}>Add to cart</button>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }

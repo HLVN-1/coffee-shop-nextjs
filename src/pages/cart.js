@@ -57,6 +57,10 @@ export default function Cart() {
     }
   };
 
+  async function removeFromCart(id) {
+    await fetch(`/api/cart/${id}`, { method: "DELETE" });
+  }
+
   return (
     <div>
       <h1>Cart</h1>
