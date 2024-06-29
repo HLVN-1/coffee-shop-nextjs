@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState({ cart: [] });
+  const router = useRouter();
+
+  function goHome() {
+    router.push("/");
+  }
 
   useEffect(() => {
     async function loadData() {
@@ -20,6 +26,7 @@ export default function Cart() {
     <>
       <h1>Cart</h1>
       <h4>Here is our cart:</h4>
+      <button onClick={goHome}>Go Home</button>
       <div
         style={{
           display: "flex",
@@ -28,10 +35,10 @@ export default function Cart() {
           padding: "10px",
         }}
       >
-        {cartItems.cart.map((item) => {
+        {cartItems.cart.map((item, index) => {
           return (
             <div
-              key={item.id}
+              key={(item.id, index)}
               style={{
                 width: "300px",
                 border: "1px solid black",
@@ -40,7 +47,7 @@ export default function Cart() {
                 padding: "10px",
               }}
             >
-              <h3>{item.id}</h3>
+              <h3>{(item.id, item.index)}</h3>
               <p>{item.quantity}</p>
               <button onClick={() => removeFromCart(item.id)}>Remove</button>
             </div>
