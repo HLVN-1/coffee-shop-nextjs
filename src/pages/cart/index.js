@@ -24,6 +24,32 @@ export default function Cart() {
       setCartItems((prevState) => ({
         cart: prevState.cart.filter((item) => item.id !== id),
       }));
+      alert("Item removed from cart");
+    } else {
+      throw new Error("Failed to remove item from cart");
+    }
+  }
+
+  async function increment(id) {
+    try {
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ action: "increment", itemId: id }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to increase item qty in cart");
+      }
+
+      const { cart } = await res.json();
+      setCartItems({ cart });
+      alert("Item quantity increased in cart");
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
     }
   }
 
@@ -40,8 +66,8 @@ export default function Cart() {
           padding: "10px",
         }}
       >
-        {cartItems.cart.map((item) => {
-          const itemName = item.name || item.title || "Unnamed Item";
+        {cartItems.cart.map((item, index) => {
+          const itemName = item || item.title || "Unnamed Item";
           return (
             <div
               key={item.id}
@@ -58,6 +84,8 @@ export default function Cart() {
               </h3>
               <p>Quantity - {item.quantity}</p>
               <button onClick={() => removeFromCart(item.id)}>Remove</button>
+              <button onClick={() => increment(item.quantity)}>+</button>
+              <button onClick={() => decrement(item.quantity)}>-</button>
             </div>
           );
         })}
