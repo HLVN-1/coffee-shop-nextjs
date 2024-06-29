@@ -29,6 +29,7 @@ export const db = {
     delete(cartItemId) {
       const db = readDb();
       db.cart = db.cart.filter((cartItem) => cartItem.id !== cartItemId);
+      console.log({ cart: JSON.stringify(db.cart), cartItemId });
       writeDb(db);
     },
   },
