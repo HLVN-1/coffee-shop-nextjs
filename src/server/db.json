@@ -63,7 +63,13 @@
   ],
   "cart": [
     {
-      "id": 2,
+      "id": 1,
+      "name": "Latte",
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "name": "Long Black",
       "quantity": 1
     }
   ]

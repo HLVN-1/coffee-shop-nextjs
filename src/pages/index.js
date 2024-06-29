@@ -15,13 +15,14 @@ export default function Home() {
     loadData();
   }, []);
 
-  function addToCart(id) {
+  // NEEDED TO ADD NAME PARAMETER TO THIS FUNCTION. AND TO FETCH REQUEST. DOI
+  function addToCart(id, name) {
     fetch(`/api/cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: id, quantity: 1 }),
+      body: JSON.stringify({ id, name, quantity: 1 }),
     });
   }
 
@@ -61,7 +62,9 @@ export default function Home() {
               <h3>{item.name}</h3>
               <p>{item.description}</p>
               <p>{item.price}</p>
-              <button onClick={() => addToCart(item.id)}>Add to cart</button>
+              <button onClick={() => addToCart(item.id, item.name)}>
+                Add to cart
+              </button>
             </div>
           );
         })}

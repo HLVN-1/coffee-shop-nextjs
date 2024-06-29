@@ -20,6 +20,11 @@ export default function Cart() {
 
   async function removeFromCart(id) {
     const res = await fetch(`/api/cart/${id}`, { method: "DELETE" });
+    if (res.ok) {
+      setCartItems((prevState) => ({
+        cart: prevState.cart.filter((item) => item.id !== id),
+      }));
+    }
   }
 
   return (
@@ -35,10 +40,11 @@ export default function Cart() {
           padding: "10px",
         }}
       >
-        {cartItems.cart.map((item, index) => {
+        {cartItems.cart.map((item) => {
+          const itemName = item.name || item.title || "Unnamed Item";
           return (
             <div
-              key={(item.id, index)}
+              key={item.id}
               style={{
                 width: "300px",
                 border: "1px solid black",
@@ -47,8 +53,10 @@ export default function Cart() {
                 padding: "10px",
               }}
             >
-              <h3>{(item.id, item.index)}</h3>
-              <p>{item.quantity}</p>
+              <h3>
+                {item.id}. {item.name}
+              </h3>
+              <p>Quantity - {item.quantity}</p>
               <button onClick={() => removeFromCart(item.id)}>Remove</button>
             </div>
           );
