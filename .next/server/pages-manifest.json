@@ -3,6 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/cart": "pages/cart.js",
+  "/api/cart/[id]": "pages/api/cart/[id].js",
   "/api/cart": "pages/api/cart.js",
   "/": "pages/index.js"
 }

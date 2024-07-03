@@ -70,7 +70,18 @@
       "quantity": 3
     },
     {
-      "quantity": 3
+      "id": 2,
+      "name": "Flat White",
+      "description": "Espresso shots with steamed milk and a little foam",
+      "price": 4,
+      "quantity": 2
+    },
+    {
+      "id": 9,
+      "name": "Ristretto",
+      "description": "Espresso with less water",
+      "price": 5,
+      "quantity": 2
     }
   ]
 }

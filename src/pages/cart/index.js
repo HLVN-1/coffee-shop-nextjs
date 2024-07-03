@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState({ cart: [] });
+
   const router = useRouter();
 
   function goHome() {
@@ -30,26 +31,22 @@ export default function Cart() {
     }
   }
 
-  async function increment(id) {
-    try {
-      const res = await fetch("/api/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ action: "increment", itemId: id }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to increase item qty in cart");
-      }
-
-      const { cart } = await res.json();
-      setCartItems({ cart });
-      alert("Item quantity increased in cart");
-    } catch (error) {
-      console.error(error);
-      alert(error.message);
+  async function updateCartItem(id, quantity) {
+    const res = await fetch(`/api/cart/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ quantity }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
+      setCartItems((prevState) => ({
+        cart: prevState.cart.map((item) =>
+          item.id === id ? { ...item, quantity } : item
+        ),
+      }));
+    } else {
+      throw new Error("Failed to update item in cart");
     }
   }
 
@@ -84,8 +81,16 @@ export default function Cart() {
               </h3>
               <p>Quantity - {item.quantity}</p>
               <button onClick={() => removeFromCart(item.id)}>Remove</button>
-              <button onClick={() => increment(item.quantity)}>+</button>
-              <button onClick={() => decrement(item.quantity)}>-</button>
+              <button
+                onClick={() => updateCartItem(item.id, item.quantity + 1)}
+              >
+                +
+              </button>
+              <button
+                onClick={() => updateCartItem(item.id, item.quantity - 1)}
+              >
+                -
+              </button>
             </div>
           );
         })}
